@@ -1,0 +1,7 @@
+retrain_id,model_name,training_data_from,training_data_to,algorithm,parameters,retrain_date,model_version,performance_score,status
+RTN-001,Crane_BiLSTM_Health_Predictor_v1.0,2026-08-01,2026-08-31,RandomForest + MLP Ensemble,"n_estimators=100, max_depth=12",2026-09-01 02:00,v1.0.0,"Accuracy: 94.8%, RUL MAE: 18.2 hrs",Active
+RTN-002,Crane_MultiOutput_Predictor,2026-08-17 12:30,2026-09-16 08:54,RandomForest Classifier/Regressor + Isolation Forest,"n_estimators=100, max_depth=10",2026-09-16 12:31,v1.2.0,"Accuracy: 100.0%, RUL MAE: 8.1 hrs",Active
+RTN-003,Crane_MultiOutput_Predictor,2026-08-17 12:30,2026-09-16 08:54,RandomForest Classifier/Regressor + Isolation Forest,"n_estimators=100, max_depth=10",2026-09-16 12:59,v1.3.0,"Accuracy: 100.0%, RUL MAE: 8.1 hrs",Active
+RTN-004,Crane_MultiOutput_Predictor,2026-08-17 12:30,2026-09-16 08:54,RandomForest Classifier/Regressor + Isolation Forest,"n_estimators=100, max_depth=10",2026-09-16 21:03,v1.4.0,"Accuracy: 100.0%, RUL MAE: 8.1 hrs",Active
+RTN-005,Crane_MultiOutput_Predictor,2026-08-17 12:30,2026-09-16 08:54,RandomForest Classifier/Regressor + Isolation Forest,"n_estimators=100, max_depth=10",2026-09-16 21:25,v1.5.0,"Accuracy: 100.0%, RUL MAE: 8.1 hrs",Active
+RTN-006,Crane_MultiOutput_Predictor,2026-08-17 12:30,2026-09-16 08:54,RandomForest Classifier/Regressor + Isolation Forest,"n_estimators=100, max_depth=10",2026-09-17 10:03,v1.6.0,"Accuracy: 100.0%, RUL MAE: 8.1 hrs",Active

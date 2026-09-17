@@ -1,0 +1,3 @@
+alert_id,crane_id,prediction_id,alert_type,severity,message,alert_time,status,acknowledged_by,acknowledged_at
+ALT-001,CR-003,PRD-001,Vibration Warning,High,Gearbox vibration exceeded threshold (1.45 mm/s).,2026-09-16 11:02,Acknowledged,Rajesh Kumar,2026-09-16 11:15
+ALT-002,CR-005,PRD-002,Motor Overheat Critical,Critical,Hoist motor temp reached 94.2°C. Immediate action required.,2026-09-16 11:31,New,,

@@ -1,0 +1,3 @@
+prediction_id,crane_id,component_id,timestamp,health_score,failure_probability,rul_hours,anomaly_score,prediction_model,status
+PRD-001,CR-003,CMP-014,2026-09-16 11:00,62.5,37.5,320,0.0842,Bi-LSTM + Isolation Forest,Logged
+PRD-002,CR-005,CMP-026,2026-09-16 11:30,22.0,78.0,45,0.2415,Bi-LSTM + Isolation Forest,Alert Triggered

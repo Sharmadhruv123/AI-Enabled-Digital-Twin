@@ -1,0 +1,6 @@
+crane_id,crane_name,crane_type,model,capacity_tons,location,manufacture_year,status
+CR-001,STS Super Crane 1,Ship-to-Shore (STS),ZPMC-STS-65T,65,Terminal A - Berth 1,2021,Running
+CR-002,STS Super Crane 2,Ship-to-Shore (STS),ZPMC-STS-65T,65,Terminal A - Berth 2,2021,Running
+CR-003,RTG Yard Crane 1,Rubber-Tyred Gantry (RTG),Kalmar-RTG-41T,41,Container Yard Block C,2022,Warning
+CR-004,RMG Rail Crane 1,Rail-Mounted Gantry (RMG),Liebherr-RMG-50T,50,Rail Terminal Block R1,2020,Running
+CR-005,RTG Yard Crane 2,Rubber-Tyred Gantry (RTG),Kalmar-RTG-41T,41,Container Yard Block D,2023,Critical

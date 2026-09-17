@@ -618,7 +618,6 @@ if page == "Digital Twin":
   {sensor_row("∿","rgba(168,85,247,0.12)","Vibration Spectrum",f"{sim_vib:.2f}","mm/s",vib_color,vib_pct)}
   {sensor_row("⚡","rgba(255,184,0,0.12)","Motor Current",f"{curr_val:.1f}","A","#FFB800",curr_pct)}
   {sensor_row("⊙","rgba(0,217,255,0.12)","Hydraulic Pressure",f"{press_val:.0f}","bar","#00D9FF",press_pct)}
-  {sensor_row("⏱","rgba(0,255,136,0.12)","Cumulative Runtime",f"{int(runtime_val)}","hrs","#00FF88",min(100,runtime_val/4000*100))}
 </div>
         """, unsafe_allow_html=True)
 

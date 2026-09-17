@@ -1,0 +1,4 @@
+feedback_id,work_order_id,crane_id,feedback_date,findings,actions_taken,condition_after,repair_duration_hours,notes
+FBK-001,5003,CR-001,2026-09-01 12:15,Minor surface wear on wire rope strands. Replaced per safety schedule.,"Replaced wire rope, lubricated drum sheaves, recalibrated tension sensor.",Normal,3.5,No structural defects found on sheaves.
+FBK-002,5004,CR-001,2026-09-17 09:19,Bearing race wear detected. Replaced rollers.,"Installed new bearing set, replaced oil filter.",Normal,2.58,
+FBK-003,5002,CR-005,2026-09-17 10:01,Bearing race wear detected. Replaced rollers.,"Installed new bearing set, replaced oil filter.",Normal,2.5,

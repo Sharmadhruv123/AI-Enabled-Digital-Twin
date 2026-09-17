@@ -1,0 +1,7 @@
+work_order_id,crane_id,issue,priority,action,status,created_at,closed_at,assigned_parts,total_cost,assigned_technician
+5001,CR-003,High Gearbox Vibration & Heat,High,Corrective Maintenance,In Progress,2026-09-12 10:00,,Bearing Set (Heavy Duty),450.0,Rajesh Kumar
+5002,CR-005,Critical Motor Current & Overheating,Emergency,Corrective Maintenance,Completed,2026-09-15 16:30,2026-09-17 10:01,"Synthetic Oil Filter, Hydraulic Pump Assembly",3185.0,Sharma Dhruv
+5003,CR-001,Routine Wire Rope Inspection,Medium,Preventive Maintenance,Completed,2026-09-01 08:30,2026-09-01 12:00,Wire Rope (50m Galvanized),1200.0,Vikram Singh
+5004,CR-001,High Vibration,Medium,Corrective Maintenance,Completed,2026-09-16 21:25,2026-09-17 09:19,"Bearing Set (Heavy Duty), Wire Rope (50m Galvanized)",1650.0,Sharma Dhruv
+5005,CR-005,High Bearing Wear & Elevated Temperature,High,Corrective Maintenance,Open,2026-09-17 10:00,,Synthetic Oil Filter,85.0,Sharma Dhruv
+5006,CR-005,Overheating,Emergency,Preventive Maintenance,Open,2026-09-17 10:01,,"Synthetic Oil Filter, Hydraulic Pump Assembly",3185.0,Sharma Dhruv

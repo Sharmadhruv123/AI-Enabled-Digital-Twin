@@ -1,0 +1,31 @@
+component_id,crane_id,component_name,component_type,installation_date,criticality,status
+CMP-001,CR-001,Hoist Motor,Electrical/Drive,2023-03-15,High,Operational
+CMP-002,CR-001,Main Gearbox,Mechanical Transmission,2023-03-15,Critical,Operational
+CMP-003,CR-001,Wire Ropes & Drums,Structural/Lifting,2023-03-15,Critical,Operational
+CMP-004,CR-001,Trolley Drive System,Mechanical Motion,2023-03-15,Medium,Operational
+CMP-005,CR-001,Electrical Control Panel,Power Distribution,2023-03-15,High,Operational
+CMP-006,CR-001,Structural Load Cells,Structural Sensing,2023-03-15,High,Operational
+CMP-007,CR-002,Hoist Motor,Electrical/Drive,2023-03-15,High,Operational
+CMP-008,CR-002,Main Gearbox,Mechanical Transmission,2023-03-15,Critical,Operational
+CMP-009,CR-002,Wire Ropes & Drums,Structural/Lifting,2023-03-15,Critical,Operational
+CMP-010,CR-002,Trolley Drive System,Mechanical Motion,2023-03-15,Medium,Operational
+CMP-011,CR-002,Electrical Control Panel,Power Distribution,2023-03-15,High,Operational
+CMP-012,CR-002,Structural Load Cells,Structural Sensing,2023-03-15,High,Operational
+CMP-013,CR-003,Hoist Motor,Electrical/Drive,2023-03-15,High,Warning
+CMP-014,CR-003,Main Gearbox,Mechanical Transmission,2023-03-15,Critical,Warning
+CMP-015,CR-003,Wire Ropes & Drums,Structural/Lifting,2023-03-15,Critical,Warning
+CMP-016,CR-003,Trolley Drive System,Mechanical Motion,2023-03-15,Medium,Warning
+CMP-017,CR-003,Electrical Control Panel,Power Distribution,2023-03-15,High,Warning
+CMP-018,CR-003,Structural Load Cells,Structural Sensing,2023-03-15,High,Warning
+CMP-019,CR-004,Hoist Motor,Electrical/Drive,2023-03-15,High,Operational
+CMP-020,CR-004,Main Gearbox,Mechanical Transmission,2023-03-15,Critical,Operational
+CMP-021,CR-004,Wire Ropes & Drums,Structural/Lifting,2023-03-15,Critical,Operational
+CMP-022,CR-004,Trolley Drive System,Mechanical Motion,2023-03-15,Medium,Operational
+CMP-023,CR-004,Electrical Control Panel,Power Distribution,2023-03-15,High,Operational
+CMP-024,CR-004,Structural Load Cells,Structural Sensing,2023-03-15,High,Operational
+CMP-025,CR-005,Hoist Motor,Electrical/Drive,2023-03-15,High,Critical
+CMP-026,CR-005,Main Gearbox,Mechanical Transmission,2023-03-15,Critical,Critical
+CMP-027,CR-005,Wire Ropes & Drums,Structural/Lifting,2023-03-15,Critical,Critical
+CMP-028,CR-005,Trolley Drive System,Mechanical Motion,2023-03-15,Medium,Critical
+CMP-029,CR-005,Electrical Control Panel,Power Distribution,2023-03-15,High,Critical
+CMP-030,CR-005,Structural Load Cells,Structural Sensing,2023-03-15,High,Critical

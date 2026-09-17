@@ -1,0 +1,7 @@
+spare_part_id,part_name,part_number,category,stock_qty,reserved_qty,reorder_level,unit_price,status
+SP-001,Bearing Set (Heavy Duty),BRG-6320-C3,Mechanical,13,2,5,450.0,Available
+SP-002,Wire Rope (50m Galvanized),WR-32MM-50M,Rigging,5,1,3,1200.0,Available
+SP-003,Synthetic Oil Filter,FLT-HYD-99,Hydraulics,24,4,10,85.0,Available
+SP-004,Hydraulic Pump Assembly,PMP-REX-250,Hydraulics,12,1,2,3100.0,Available
+SP-005,Control PCBA Unit,PCB-ABB-800,Electronics,4,0,2,1850.0,Available
+SP-006,Brake Shoe Lining Set,BRK-SH-400,Braking,18,0,5,320.0,Available
