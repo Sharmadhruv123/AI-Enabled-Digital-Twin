@@ -1,0 +1,82 @@
+[
+  {
+    "id": "3102879c-0e5e-48af-8d3d-350708e89a19",
+    "crane_id": 3,
+    "issue": "Predicted Failure",
+    "priority": "HIGH",
+    "status": "OPEN",
+    "created_at": "2026-02-25T14:50:48.705Z"
+  },
+  {
+    "id": "52a73a70-d7c7-4029-9017-28078a8cc910",
+    "crane_id": 3,
+    "issue": "Predicted Failure",
+    "priority": "HIGH",
+    "status": "OPEN",
+    "created_at": "2026-02-25T16:04:55.456Z"
+  },
+  {
+    "id": "84dc9d7d-c859-438a-99c2-faad884e61f9",
+    "crane_id": 3,
+    "issue": "Predicted Failure",
+    "priority": "HIGH",
+    "status": "OPEN",
+    "created_at": "2026-02-25T16:05:03.176Z"
+  },
+  {
+    "id": "201a26e9-d037-4e33-8864-26c7a829f439",
+    "crane_id": 3,
+    "issue": "Predicted Failure",
+    "priority": "HIGH",
+    "status": "OPEN",
+    "created_at": "2026-02-25T16:05:17.118Z"
+  },
+  {
+    "id": "88b21f0b-8452-4e92-bd18-3caf1d50f904",
+    "crane_id": 3,
+    "issue": "Predicted Failure",
+    "priority": "HIGH",
+    "status": "OPEN",
+    "created_at": "2026-02-25T16:22:55.965Z"
+  },
+  {
+    "id": "e603ec90-951e-47ea-b02f-3b5d0a23e421",
+    "crane_id": 3,
+    "issue": "Predicted Failure",
+    "priority": "HIGH",
+    "status": "OPEN",
+    "created_at": "2026-02-25T16:23:14.799Z"
+  },
+  {
+    "id": "0a11d53e-08a4-483b-adc1-262b984c351a",
+    "crane_id": 3,
+    "issue": "Predicted Failure",
+    "priority": "HIGH",
+    "status": "OPEN",
+    "created_at": "2026-02-25T16:23:17.939Z"
+  },
+  {
+    "id": "c3e16b6e-fa0d-4f4a-b188-d08df6d35546",
+    "crane_id": 3,
+    "issue": "Predicted Failure",
+    "priority": "HIGH",
+    "status": "OPEN",
+    "created_at": "2026-02-25T16:25:06.402Z"
+  },
+  {
+    "id": "059aba60-0a4e-48e4-a302-488ca4682e96",
+    "crane_id": 3,
+    "issue": "Predicted Failure",
+    "priority": "HIGH",
+    "status": "OPEN",
+    "created_at": "2026-02-25T16:25:16.966Z"
+  },
+  {
+    "id": "6857ecbe-876f-4e7a-b07c-098e434137b1",
+    "crane_id": 3,
+    "issue": "Predicted Failure",
+    "priority": "HIGH",
+    "status": "OPEN",
+    "created_at": "2026-02-25T16:25:17.989Z"
+  }
+]
