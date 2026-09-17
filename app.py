@@ -32,15 +32,20 @@ st.markdown("""
 
 html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
 
-/* ===== HIDE STREAMLIT DEFAULT HEADER BAR ===== */
-header[data-testid="stHeader"],
-[data-testid="stHeader"],
-.stAppHeader {
+/* ===== HEADER & SIDEBAR TOGGLE ===== */
+header[data-testid="stHeader"], [data-testid="stHeader"], .stAppHeader {
+    background-color: transparent !important;
+}
+[data-testid="stToolbar"] {
     display: none !important;
 }
-
-#stDecoration, [data-testid="stDecoration"], div[data-testid="stToolbar"] {
-    display: none !important;
+[data-testid="collapsedControl"] {
+    color: #00D9FF !important;
+    background: #1C2333 !important;
+    border: 1px solid #30363D !important;
+    border-radius: 8px !important;
+    margin-top: 5px !important;
+    margin-left: 5px !important;
 }
 
 /* ===== CUSTOM SIDEBAR TOGGLE BUTTON (injected by JS) ===== */
@@ -271,47 +276,6 @@ hr { border-color: #21262D !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# ── Custom Sidebar Toggle Button (JS-injected, always visible) ──
-st.markdown("""
-<script>
-(function() {
-  // Create our custom floating button once
-  function injectBtn() {
-    if (document.getElementById('custom-sidebar-btn')) return;
-    var btn = document.createElement('div');
-    btn.id = 'custom-sidebar-btn';
-    btn.title = 'Toggle Sidebar';
-    btn.innerHTML = '&#9776;'; // hamburger ☰
-    btn.onclick = function() {
-      // Try to find and click Streamlit's own sidebar toggle
-      var toggles = document.querySelectorAll(
-        '[data-testid="collapsedControl"], [data-testid="stSidebarCollapseButton"], ' +
-        'button[aria-label="Close sidebar"], button[aria-label="Open sidebar"], ' +
-        'button[aria-label="Expand sidebar"], button[aria-label="Collapse sidebar"]'
-      );
-      if (toggles.length > 0) {
-        toggles[0].click();
-      } else {
-        // Fallback: look for the sidebar and toggle its display
-        var sb = document.querySelector('[data-testid="stSidebar"]');
-        if (sb) sb.style.display = sb.style.display === 'none' ? '' : 'none';
-      }
-    };
-    document.body.appendChild(btn);
-  }
-
-  // Run immediately and on DOM changes
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', injectBtn);
-  } else {
-    injectBtn();
-  }
-  // Re-inject after Streamlit re-renders
-  setInterval(injectBtn, 600);
-})();
-</script>
-""", unsafe_allow_html=True)
-
 
 # ── Helpers ──
 def load_data():
@@ -513,10 +477,20 @@ with st.sidebar:
     selected_crane = st.selectbox("Crane", crane_ids, index=default_idx, label_visibility="collapsed")
 
     st.markdown('<div style="height:1px;background:#21262D;margin:14px 0;"></div><div class="section-label">Telemetry Simulator</div>', unsafe_allow_html=True)
-    sim_vib  = st.slider("Vibration (mm/s)", 0.2, 3.5, 0.4, 0.1)
-    sim_temp = st.slider("Temperature (°C)", 40.0, 110.0, 65.0, 1.0)
-    sim_curr = st.slider("Motor Current (A)", 10.0, 80.0, 35.0, 1.0)
-    sim_press = st.slider("Hydraulic Pressure (bar)", 50.0, 270.0, 150.0, 5.0)
+    
+    crane_defaults = {
+        "CR-001": (0.4, 65.0, 35.0, 150.0),
+        "CR-002": (0.2, 110.0, 80.0, 270.0),
+        "CR-003": (1.2, 75.0, 50.0, 180.0),
+        "CR-004": (2.1, 95.0, 65.0, 220.0),
+        "CR-005": (0.5, 50.0, 25.0, 120.0),
+    }
+    dvib, dtemp, dcurr, dpress = crane_defaults.get(selected_crane, (0.4, 65.0, 35.0, 150.0))
+
+    sim_vib  = st.slider("Vibration (mm/s)", 0.2, 3.5, dvib, 0.1)
+    sim_temp = st.slider("Temperature (°C)", 40.0, 110.0, dtemp, 1.0)
+    sim_curr = st.slider("Motor Current (A)", 10.0, 80.0, dcurr, 1.0)
+    sim_press = st.slider("Hydraulic Pressure (bar)", 50.0, 270.0, dpress, 5.0)
 
     st.markdown('<div style="height:1px;background:#21262D;margin:14px 0;"></div><div class="section-label">Active User</div>', unsafe_allow_html=True)
     all_users_df = auth.get_all_users()
