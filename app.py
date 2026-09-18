@@ -6,6 +6,7 @@ import time
 import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime
+import streamlit.components.v1 as components
 
 import auth_service as auth
 import cmms_service as cmms
@@ -32,58 +33,44 @@ st.markdown("""
 
 html, body, [class*="css"] { font-family: 'Inter', sans-serif !important; }
 
-/* ===== HEADER & SIDEBAR TOGGLE ===== */
-header[data-testid="stHeader"], [data-testid="stHeader"], .stAppHeader {
-    background-color: transparent !important;
+/* ===== HIDE STREAMLIT TOP DECORATION & TOGGLE BUTTONS ===== */
+header[data-testid="stHeader"] {
+    background: transparent !important;
 }
-[data-testid="stToolbar"] {
-    display: none !important;
-}
-[data-testid="collapsedControl"] {
-    color: #00D9FF !important;
-    background: #1C2333 !important;
-    border: 1px solid #30363D !important;
-    border-radius: 8px !important;
-    margin-top: 5px !important;
-    margin-left: 5px !important;
+[data-testid="stDecoration"] { display: none !important; }
+[data-testid="stToolbar"]    { display: none !important; }
+
+/* 
+ * ULTIMATE SIDEBAR LOCK: Force the sidebar to remain expanded and visible 
+ * regardless of the user's localStorage state or screen size.
+ */
+section[data-testid="stSidebar"] {
+    display: block !important;
+    transform: none !important;
+    margin-left: 0 !important;
+    width: 336px !important;
+    min-width: 336px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: #161B22 !important; 
+    border-right: 1px solid #30363D !important;
 }
 
-/* ===== CUSTOM SIDEBAR TOGGLE BUTTON (injected by JS) ===== */
-#custom-sidebar-btn {
-    position: fixed;
-    top: 12px;
-    left: 12px;
-    z-index: 9999999;
-    width: 38px;
-    height: 38px;
-    background: #1C2333;
-    border: 1px solid #30363D;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: #00D9FF;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
-    user-select: none;
-}
-#custom-sidebar-btn:hover {
-    background: #21262D;
-    border-color: #00D9FF;
-    box-shadow: 0 0 12px rgba(0,217,255,0.4);
+/* Hide all collapse and expand toggle controls */
+[data-testid="collapsedControl"],
+[data-testid="stSidebarCollapseButton"],
+button[aria-label="Expand sidebar"],
+button[aria-label="Collapse sidebar"] {
+    display: none !important;
 }
 
 /* ===== APP BACKGROUND ===== */
 .stApp { background-color: #0D1117 !important; }
 .block-container { padding: 1.2rem 1.8rem 2rem 1.8rem !important; max-width: 100% !important; margin-top: 0 !important; }
-.main .block-container { padding-top: 0.8rem !important; margin-top: 0 !important; }
-.stApp > div:first-child { margin-top: 0 !important; padding-top: 0 !important; }
+.main .block-container { padding-top: 0.5rem !important; }
 .appview-container { padding-top: 0 !important; }
 
-/* ===== SIDEBAR ===== */
-[data-testid="stSidebar"] { background: #161B22 !important; border-right: 1px solid #30363D !important; }
+/* ===== SIDEBAR TEXT STYLING ===== */
 [data-testid="stSidebar"] .block-container { padding: 1.2rem 0.8rem !important; }
 [data-testid="stSidebar"] h1,[data-testid="stSidebar"] h2,[data-testid="stSidebar"] h3,
 [data-testid="stSidebar"] label,[data-testid="stSidebar"] p,[data-testid="stSidebar"] span { color: #8B949E !important; font-size: 0.82rem !important; }
@@ -282,6 +269,20 @@ def load_data():
     cranes = pd.read_csv(os.path.join(ROOT_DIR, "cranes.csv")) if os.path.exists(os.path.join(ROOT_DIR, "cranes.csv")) else pd.DataFrame()
     sensor = pd.read_csv(os.path.join(ROOT_DIR, "sensor_data.csv")) if os.path.exists(os.path.join(ROOT_DIR, "sensor_data.csv")) else pd.DataFrame()
     return cranes, sensor
+
+def render_topbar(title, subtitle, right_html=""):
+    """Renders a top bar above every page title."""
+    title_col, right_col = st.columns([3, 1])
+    with title_col:
+        st.markdown(f"""
+        <div style="padding-top:0px;">
+          <div style="font-size:1.35rem;font-weight:700;color:#E6EDF3;">{title}</div>
+          <div style="font-size:0.8rem;color:#8B949E;margin-top:2px;">{subtitle}</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with right_col:
+        st.markdown(f'<div style="text-align:right;padding-top:4px;">{right_html}</div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:1px;background:#21262D;margin-bottom:18px;margin-top:10px;"></div>', unsafe_allow_html=True)
 
 def health_badge(status):
     css = {"Normal": "b-normal", "Warning": "b-warning", "High Risk": "b-high", "Critical": "b-critical"}.get(status, "b-normal")
@@ -532,23 +533,10 @@ accent_c  = {"Normal": "#00FF88", "Warning": "#FFB800", "High Risk": "#FF7832", 
 #  PAGE: DIGITAL TWIN
 # ════════════════════════════════════════════════════════
 if page == "Digital Twin":
-    # ── Header ──
+    # ── Header with toggle ──
     now_str = datetime.now().strftime("%d %b %Y  %H:%M:%S")
-    col_hd1, col_hd2 = st.columns([3, 1])
-    with col_hd1:
-        st.markdown(f"""
-        <div style="padding-bottom:16px;border-bottom:1px solid #21262D;margin-bottom:20px;">
-          <div style="font-size:1.35rem;font-weight:700;color:#E6EDF3;">⬡ Digital Twin Fleet Monitoring</div>
-          <div style="font-size:0.8rem;color:#8B949E;margin-top:3px;">Real-time sensor telemetry, structural health &amp; subsystem status</div>
-        </div>
-        """, unsafe_allow_html=True)
-    with col_hd2:
-        st.markdown(f"""
-        <div style="text-align:right;padding-bottom:16px;border-bottom:1px solid #21262D;margin-bottom:20px;">
-          <div class="live-pill"><div class="live-dot"></div> LIVE</div>
-          <div style="font-size:0.72rem;color:#8B949E;margin-top:6px;font-family:'JetBrains Mono',monospace;">{now_str}</div>
-        </div>
-        """, unsafe_allow_html=True)
+    right = f'<div class="live-pill"><div class="live-dot"></div> LIVE</div><div style="font-size:0.72rem;color:#8B949E;margin-top:6px;font-family:\'JetBrains Mono\',monospace;">{now_str}</div>'
+    render_topbar("⬡ Digital Twin Fleet Monitoring", "Real-time sensor telemetry, structural health &amp; subsystem status", right)
 
     # ── KPI Metrics (using native st.metric for proper layout) ──
     if not cranes_df.empty:
@@ -631,20 +619,7 @@ if page == "Digital Twin":
 #  PAGE: AI ANALYTICS
 # ════════════════════════════════════════════════════════
 elif page == "AI Analytics":
-    col_hd, col_badge = st.columns([3, 1])
-    with col_hd:
-        st.markdown(f"""
-        <div style="padding-bottom:16px;border-bottom:1px solid #21262D;margin-bottom:20px;">
-          <div style="font-size:1.35rem;font-weight:700;color:#E6EDF3;">◈ AI Predictive Analytics Engine</div>
-          <div style="font-size:0.8rem;color:#8B949E;margin-top:3px;">Multi-output prediction — {selected_crane}</div>
-        </div>
-        """, unsafe_allow_html=True)
-    with col_badge:
-        st.markdown(f"""
-        <div style="text-align:right;padding-bottom:16px;border-bottom:1px solid #21262D;margin-bottom:20px;padding-top:8px;">
-          {health_badge(health_st)}
-        </div>
-        """, unsafe_allow_html=True)
+    render_topbar("◈ AI Predictive Analytics Engine", f"Multi-output prediction — {selected_crane}", health_badge(health_st))
 
     # Metrics
     a1, a2, a3, a4 = st.columns(4)
@@ -762,12 +737,7 @@ elif page == "AI Analytics":
 #  PAGE: CMMS
 # ════════════════════════════════════════════════════════
 elif page == "CMMS":
-    st.markdown("""
-    <div style="padding-bottom:16px;border-bottom:1px solid #21262D;margin-bottom:20px;">
-      <div style="font-size:1.35rem;font-weight:700;color:#E6EDF3;">▤ CMMS — Work Order Management</div>
-      <div style="font-size:0.8rem;color:#8B949E;margin-top:3px;">Computerized Maintenance Management System — Full lifecycle tracking</div>
-    </div>
-    """, unsafe_allow_html=True)
+    render_topbar("▤ CMMS — Work Order Management", "Computerized Maintenance Management System — Full lifecycle tracking")
 
     wos = cmms.get_work_orders()
     col_wl, col_wa = st.columns([1.5, 1.0], gap="medium")
@@ -847,12 +817,7 @@ elif page == "CMMS":
 #  PAGE: ERP INVENTORY
 # ════════════════════════════════════════════════════════
 elif page == "ERP Inventory":
-    st.markdown("""
-    <div style="padding-bottom:16px;border-bottom:1px solid #21262D;margin-bottom:20px;">
-      <div style="font-size:1.35rem;font-weight:700;color:#E6EDF3;">⬢ ERP Spare Parts Inventory</div>
-      <div style="font-size:0.8rem;color:#8B949E;margin-top:3px;">Auto-reserve, deduct &amp; reorder spare parts based on AI fault detection</div>
-    </div>
-    """, unsafe_allow_html=True)
+    render_topbar("⬢ ERP Spare Parts Inventory", "Auto-reserve, deduct &amp; reorder spare parts based on AI fault detection")
 
     inv = erp.get_inventory()
     col_il, col_ir = st.columns([1.6, 1.0], gap="medium")
@@ -923,12 +888,7 @@ elif page == "ERP Inventory":
 #  PAGE: CLOSED-LOOP
 # ════════════════════════════════════════════════════════
 elif page == "Closed-Loop":
-    st.markdown("""
-    <div style="padding-bottom:16px;border-bottom:1px solid #21262D;margin-bottom:20px;">
-      <div style="font-size:1.35rem;font-weight:700;color:#E6EDF3;">↻ Closed-Loop Feedback & AI Retraining</div>
-      <div style="font-size:0.8rem;color:#8B949E;margin-top:3px;">Chapter 7.4 — Technician feedback → model retraining → improved predictions</div>
-    </div>
-    """, unsafe_allow_html=True)
+    render_topbar("↻ Closed-Loop Feedback &amp; AI Retraining", "Technician feedback → model retraining → improved predictions")
 
     col_fb1, col_fb2 = st.columns(2, gap="medium")
 
@@ -978,12 +938,7 @@ elif page == "Closed-Loop":
 #  PAGE: REPORTS
 # ════════════════════════════════════════════════════════
 elif page == "Reports":
-    st.markdown("""
-    <div style="padding-bottom:16px;border-bottom:1px solid #21262D;margin-bottom:20px;">
-      <div style="font-size:1.35rem;font-weight:700;color:#E6EDF3;">▧ Reports & Data Export</div>
-      <div style="font-size:0.8rem;color:#8B949E;margin-top:3px;">Download raw datasets and generate printable HTML/PDF summary reports</div>
-    </div>
-    """, unsafe_allow_html=True)
+    render_topbar("▧ Reports &amp; Data Export", "Download raw datasets and generate printable HTML/PDF summary reports")
 
     col_r1, col_r2 = st.columns(2, gap="medium")
 
@@ -1019,12 +974,7 @@ elif page == "Reports":
 #  PAGE: USERS
 # ════════════════════════════════════════════════════════
 elif page == "Users":
-    st.markdown("""
-    <div style="padding-bottom:16px;border-bottom:1px solid #21262D;margin-bottom:20px;">
-      <div style="font-size:1.35rem;font-weight:700;color:#E6EDF3;">⊙ User & Access Control</div>
-      <div style="font-size:0.8rem;color:#8B949E;margin-top:3px;">Role-based permissions management (FR-01 &amp; FR-10)</div>
-    </div>
-    """, unsafe_allow_html=True)
+    render_topbar("⊙ User &amp; Access Control", "Role-based permissions management (FR-01 &amp; FR-10)")
 
     col_u1, col_u2 = st.columns([1.3, 1.0], gap="medium")
 
